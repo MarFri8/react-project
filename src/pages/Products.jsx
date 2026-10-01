@@ -11,6 +11,8 @@ function Products() {
         queryFn: getUsers,
     });
 
+    /* Använde console.log(users) för att få fram om det var user.name eller något annat. I detta fallat var det username */
+
     if (isLoading) {
         return <p>Laddar användare...</p>;
     }
@@ -31,7 +33,7 @@ function Products() {
 
             {users.map((user) => (
                 <div key={user.id}>
-                    <p>{user.name}</p>
+                    <p>{user.username}</p>
                 </div>
             ))}
         </div>
