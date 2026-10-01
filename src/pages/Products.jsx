@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "../services/api";
+import UserCard from "../components/UserCard";
 
 function Products() {
     const {
@@ -19,12 +20,22 @@ function Products() {
 
     if (error) {
         return (
-            <p>Vi kunde inte hämta användarna just nu. Försök igen senare.</p>
+            <div>
+                <h1>Users</h1>
+                <p>
+                    Vi kunde inte hämta användarna just nu. Försök igen senare.
+                </p>
+            </div>
         );
     }
 
     if (!users || users.length === 0) {
-        return <p>Det finns inga användare att visa.</p>;
+        return (
+            <div>
+                <h1>Users</h1>
+                <p>Det finns inga användare att visa.</p>
+            </div>
+        );
     }
 
     return (
@@ -32,9 +43,7 @@ function Products() {
             <h1>Users</h1>
 
             {users.map((user) => (
-                <div key={user.id}>
-                    <p>{user.username}</p>
-                </div>
+                <UserCard key={user.id} user={user} />
             ))}
         </div>
     );
