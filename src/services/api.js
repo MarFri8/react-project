@@ -8,7 +8,16 @@ export async function getUsers() {
     });
 
     if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        if (response.status === 401) {
+            throw new Error(`API_KEY_ERROR: ${response.status}`);
+        }
+        if (response.status === 404) {
+            throw new Error(`NOT_FOUND: ${response.status}`);
+        }
+        if (response.status === 500) {
+            throw new Error(`SERVER_ERROR: ${response.status}`);
+        }
+        throw new Error(`UNKNOWN_ERROR: ${response.status}`);
     }
 
     return response.json();

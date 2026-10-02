@@ -10,6 +10,7 @@ function Users() {
     } = useQuery({
         queryKey: ["users"],
         queryFn: getUsers,
+        retry: false,
     });
 
     /* Använde console.log(users) för att få fram om det var user.name eller något annat. I detta fallat var det username */
@@ -19,12 +20,25 @@ function Users() {
     }
 
     if (error) {
+        let errorMessage = "Något gick fel. Försök igen senare.";
+
+        if (error.message === "API_KEY_ERROR: 401") {
+            errorMessage = "Vi kunde inte ansluta till användartjänsten.";
+        }
+
+        if (error.message === "NOT_FOUND: 404") {
+            errorMessage = "Användardatan kunde inte hittas.";
+        }
+
+        if (error.message === "SERVER_ERROR: 500") {
+            errorMessage =
+                "Användartjänsten har problem just nu. Försök igen senare.";
+        }
+
         return (
             <div>
                 <h1>Users</h1>
-                <p>
-                    Vi kunde inte hämta användarna just nu. Försök igen senare.
-                </p>
+                <p>{errorMessage}</p>
             </div>
         );
     }
