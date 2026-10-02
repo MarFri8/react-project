@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "../services/api";
 import UserCard from "../components/UserCard";
 
-function Products() {
+function Users() {
     const {
         data: users,
         isLoading,
@@ -49,4 +49,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default Users;
