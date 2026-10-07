@@ -10,7 +10,7 @@ function Users() {
     } = useQuery({
         queryKey: ["users"],
         queryFn: getUsers,
-        retry: false /* Med tanke på att vi har 100 commits per dag så är det bättre att den inte försöker igen om den misslyckas, utan istället ger oss felmedelandet */,
+        retry: false /* Med tanke på att vi har 100 anrop per dag så är det bättre att den inte försöker igen om den misslyckas, utan istället ger oss felmedelandet */,
     });
 
     /* Använde console.log(users) för att få fram om det var user.name eller något annat. I detta fallat var det username */
